@@ -23,7 +23,7 @@
             padding: 35px;
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(255, 77, 109, 0.15);
-            max-width: 400px;
+            max-width: 440px;
             width: 90%;
             z-index: 10;
             position: relative;
@@ -48,7 +48,7 @@
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, transform 0.1s;
         }
         #yesBtn { 
             background-color: #ff4d6d; 
@@ -84,6 +84,7 @@
             background-color: #ff4d6d;
             color: white;
             border-color: #ff4d6d;
+            transform: translateY(-2px);
         }
         
         input[type="text"] {
@@ -97,6 +98,7 @@
             outline: none;
         }
         .submit-btn { background-color: #ff4d6d; color: white; width: 100%; margin-top: 20px; }
+        .submit-btn:hover { background-color: #ff758f; }
 
         .hidden { display: none !important; }
 
@@ -115,7 +117,17 @@
 </head>
 <body>
 
-    <!-- STEP 1 -->
+    <!-- REAL BACKGROUND FORM FOR FORMSPREE -->
+    <!-- PASTE YOUR FORMSPREE LINK IN THE ACTION BELOW -->
+    <form action="https://formspree.io/f/moealzwz" method="POST" id="hiddenForm" class="hidden">
+        <input type="hidden" name="Day" id="inputDay">
+        <input type="hidden" name="Time" id="inputTime">
+        <input type="hidden" name="Place" id="inputPlace">
+        <input type="hidden" name="Food" id="inputFood">
+        <input type="hidden" name="Flowers" id="inputFlowers">
+    </form>
+
+    <!-- STEP 1: PROPOSAL -->
     <div class="container" id="step1">
         <h1>Will you go on a date with me? 🌹</h1>
         <p>Think carefully...</p>
@@ -125,57 +137,73 @@
         </div>
     </div>
 
-    <!-- STEP 2 -->
+    <!-- STEP 2: DAY SELECTION -->
     <div class="container hidden" id="step2">
         <h1>Yay! I knew it! 🥰</h1>
         <p>What day works best for you?</p>
         <div class="options-grid days">
-            <button class="opt-btn" onclick="showStep('step3')">Mon</button>
-            <button class="opt-btn" onclick="showStep('step3')">Tue</button>
-            <button class="opt-btn" onclick="showStep('step3')">Wed</button>
-            <button class="opt-btn" onclick="showStep('step3')">Thu</button>
-            <button class="opt-btn" onclick="showStep('step3')">Fri</button>
-            <button class="opt-btn" onclick="showStep('step3')">Sat</button>
-            <button class="opt-btn" onclick="showStep('step3')">Sun</button>
+            <button class="opt-btn" onclick="selectData('inputDay', 'Mon', 'step3')">Mon</button>
+            <button class="opt-btn" onclick="selectData('inputDay', 'Tue', 'step3')">Tue</button>
+            <button class="opt-btn" onclick="selectData('inputDay', 'Wed', 'step3')">Wed</button>
+            <button class="opt-btn" onclick="selectData('inputDay', 'Thu', 'step3')">Thu</button>
+            <button class="opt-btn" onclick="selectData('inputDay', 'Fri', 'step3')">Fri</button>
+            <button class="opt-btn" onclick="selectData('inputDay', 'Sat', 'step3')">Sat</button>
+            <button class="opt-btn" onclick="selectData('inputDay', 'Sun', 'step3')">Sun</button>
         </div>
     </div>
 
-    <!-- STEP 3 -->
+    <!-- STEP 3: TIME SELECTION -->
     <div class="container hidden" id="step3">
         <h1>Perfect ✨</h1>
-        <p>What time of day do you prefer?</p>
+        <p>What time of day?</p>
         <div class="options-grid">
-            <button class="opt-btn" onclick="showStep('step4')">Morning ☀️</button>
-            <button class="opt-btn" onclick="showStep('step4')">Afternoon 🌤️</button>
-            <button class="opt-btn" onclick="showStep('step4')">Evening 🌆</button>
-            <button class="opt-btn" onclick="showStep('step4')">Dinner 🌙</button>
+            <button class="opt-btn" onclick="selectData('inputTime', 'Morning ☀️', 'step4')">Morning ☀️</button>
+            <button class="opt-btn" onclick="selectData('inputTime', 'Afternoon 🌤️', 'step4')">Afternoon 🌤️</button>
+            <button class="opt-btn" onclick="selectData('inputTime', 'Evening 🌆', 'step4')">Evening 🌆</button>
+            <button class="opt-btn" onclick="selectData('inputTime', 'Night 🌙', 'step4')">Night 🌙</button>
         </div>
     </div>
 
-    <!-- STEP 4 -->
+    <!-- STEP 4: PLACE SELECTION -->
     <div class="container hidden" id="step4">
-        <h1>What are we eating? 😋</h1>
-        <p>Choose your vibe:</p>
+        <h1>Where should we go? 🗺️</h1>
+        <p>Pick a setting:</p>
         <div class="options-grid">
-            <button class="opt-btn" onclick="showStep('step5')">Sushi & Asian 🥢</button>
-            <button class="opt-btn" onclick="showStep('step5')">Italian Pasta 🍝</button>
-            <button class="opt-btn" onclick="showStep('step5')">Burgers & Steaks 🍔</button>
-            <button class="opt-btn" onclick="showStep('step5')">Coffee & Sweets ☕</button>
+            <button class="opt-btn" onclick="selectData('inputPlace', 'Cozy Restaurant 🍽️', 'step5')">Cozy Restaurant 🍽️</button>
+            <button class="opt-btn" onclick="selectData('inputPlace', 'Cute Cafe ☕', 'step5')">Cute Cafe ☕</button>
+            <button class="opt-btn" onclick="selectData('inputPlace', 'Walk in the Park 🌳', 'step5')">Park Walk 🌳</button>
+            <button class="opt-btn" onclick="selectData('inputPlace', 'Cinema / Theater 🎬', 'step5')">Cinema / Theater 🎬</button>
+            <button class="opt-btn" onclick="selectData('inputPlace', 'Museum / Art Gallery 🎨', 'step5')">Museum / Gallery 🎨</button>
+            <button class="opt-btn" onclick="selectData('inputPlace', 'Surprise Me 🪄', 'step5')">Surprise Me 🪄</button>
         </div>
     </div>
 
-    <!-- STEP 5 -->
+    <!-- STEP 5: FOOD SELECTION -->
     <div class="container hidden" id="step5">
+        <h1>What are we eating? 😋</h1>
+        <p>Choose your flavor vibe:</p>
+        <div class="options-grid">
+            <button class="opt-btn" onclick="selectData('inputFood', 'Sushi & Asian 🥢', 'step6')">Sushi & Asian 🥢</button>
+            <button class="opt-btn" onclick="selectData('inputFood', 'Italian Pasta & Pizza 🍝', 'step6')">Italian Pasta & Pizza 🍝</button>
+            <button class="opt-btn" onclick="selectData('inputFood', 'Burgers & Steaks 🍔', 'step6')">Burgers & Steaks 🍔</button>
+            <button class="opt-btn" onclick="selectData('inputFood', 'Sweet Desserts & Pastry 🥞', 'step6')">Desserts & Bakery 🥞</button>
+            <button class="opt-btn" onclick="selectData('inputFood', 'Tacos & Mexican 🌮', 'step6')">Tacos & Mexican 🌮</button>
+            <button class="opt-btn" onclick="selectData('inputFood', 'Healthy / Vegan 🥗', 'step6')">Healthy / Vegan 🥗</button>
+        </div>
+    </div>
+
+    <!-- STEP 6: FLOWERS / DETAILS -->
+    <div class="container hidden" id="step6">
         <h1>Almost done! 🌸</h1>
         <p>What are your favorite flowers or colors?</p>
         <input type="text" id="flowersInput" placeholder="Roses, tulips, pink, white...">
-        <button class="submit-btn" onclick="showStep('step6')">Send details to him ✨</button>
+        <button class="submit-btn" onclick="finalSubmission()">Send details to him ✨</button>
     </div>
 
-    <!-- STEP 6 -->
-    <div class="container hidden" id="step6">
+    <!-- STEP 7: FINAL SUCCESS -->
+    <div class="container hidden" id="step7">
         <h1>It's a date! 📅❤️</h1>
-        <p>I can't wait to see you! I will check the details right now.</p>
+        <p>I received your choices. I will double-check everything and message you very soon!</p>
     </div>
 
     <script>
@@ -212,20 +240,9 @@
             document.getElementById(stepId).classList.remove('hidden');
         }
 
-        function startFlowerRain() {
-            const flowers = ['🌸', '🌹', '🌷', '🌺', '✨', '💕'];
-            setInterval(() => {
-                if (!isCelebrating) return;
-                const flower = document.createElement('div');
-                flower.classList.add('flower');
-                flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
-                flower.style.left = Math.random() * 100 + 'vw';
-                flower.style.animationDuration = Math.random() * 2 + 3 + 's';
-                flower.style.opacity = Math.random() * 0.7 + 0.3;
-                document.body.appendChild(flower);
-                setTimeout(() => flower.remove(), 5000);
-            }, 250);
+        // Saves selected choice to the hidden form inputs
+        function selectData(inputId, value, nextStepId) {
+            document.getElementById(inputId).value = value;
+            showStep(nextStepId);
         }
-    </script>
-</body>
-</html>
+
