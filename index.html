@@ -1,11 +1,11 @@
-<script>
-    // 1. ВСТАВЬ СВОЮ ССЫЛКУ ИЗ FORMSPREE МЕЖДУ КАВЫЧКАМИ НИЖЕ:
-    const FORMSPREE_LINK = 'https://formspree.io/f/moealzwz';
-</script>
-
 <!DOCTYPE html>
 <html lang="en" translate="no">
 <head>
+    <script>
+        // ВСТАВЬ СВОЮ ССЫЛКУ ИЗ FORMSPREE МЕЖДУ КАВЫЧКАМИ НИЖЕ:
+        const FORMSPREE_LINK = 'https://formspree.io/f/moealzwz';
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
@@ -28,7 +28,7 @@
             padding: 35px;
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(255, 77, 109, 0.15);
-            max-width: 440px;
+            max-width: 400px;
             width: 90%;
             z-index: 10;
             position: relative;
@@ -37,35 +37,35 @@
         h1 { color: #ff4d6d; font-size: 26px; margin-bottom: 25px; }
         p { color: #666; font-size: 16px; margin-bottom: 20px; }
         
-        /* Раздельное и безопасное размещение главных кнопок */
-        .main-buttons-zone {
+        .btn-group {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             gap: 20px;
             margin-top: 25px;
-            min-height: 140px;
             position: relative;
+            height: 80px;
         }
         button {
-            padding: 14px 40px;
+            padding: 14px 28px;
             font-size: 16px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
+            transition: background-color 0.2s;
         }
         #yesBtn { 
             background-color: #ff4d6d; 
             color: white; 
             box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
-            width: 140px;
+            z-index: 12;
         }
         #noBtn { 
             background-color: #a0a0a0; 
             color: white; 
-            width: 140px;
-            transition: transform 0.1s ease;
+            z-index: 11;
+            transition: transform 0.1s ease, left 0.1s ease, top 0.1s ease;
         }
 
         .options-grid {
@@ -124,9 +124,9 @@
     <div class="container" id="step1">
         <h1>Will you go on a date with me? 🌹</h1>
         <p>Think carefully...</p>
-        <div class="main-buttons-zone">
+        <div class="btn-group" id="mainArea">
             <button id="yesBtn" onclick="handleYesClick()">Yes!</button>
-            <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+            <button id="noBtn" onmouseover="moveAndShrinkNoButton()" onclick="moveAndShrinkNoButton()">No</button>
         </div>
     </div>
 
@@ -135,125 +135,105 @@
         <h1>Yay! I knew it! 🥰</h1>
         <p>What day works best for you?</p>
         <div class="options-grid days">
-            <button class="opt-btn" onclick="saveChoice('Day', 'Mon', 'step3')">Mon</button>
-            <button class="opt-btn" onclick="saveChoice('Day', 'Tue', 'step3')">Tue</button>
-            <button class="opt-btn" onclick="saveChoice('Day', 'Wed', 'step3')">Wed</button>
-            <button class="opt-btn" onclick="saveChoice('Day', 'Thu', 'step3')">Thu</button>
-            <button class="opt-btn" onclick="saveChoice('Day', 'Fri', 'step3')">Fri</button>
-            <button class="opt-btn" onclick="saveChoice('Day', 'Sat', 'step3')">Sat</button>
-            <button class="opt-btn" onclick="saveChoice('Day', 'Sun', 'step3')">Sun</button>
+            <button class="opt-btn" onclick="showStep('step3')">Mon</button>
+            <button class="opt-btn" onclick="showStep('step3')">Tue</button>
+            <button class="opt-btn" onclick="showStep('step3')">Wed</button>
+            <button class="opt-btn" onclick="showStep('step3')">Thu</button>
+            <button class="opt-btn" onclick="showStep('step3')">Fri</button>
+            <button class="opt-btn" onclick="showStep('step3')">Sat</button>
+            <button class="opt-btn" onclick="showStep('step3')">Sun</button>
         </div>
     </div>
 
     <!-- STEP 3 -->
     <div class="container hidden" id="step3">
-        <h1>Perfect ✨</h1>
-        <p>What time of day?</p>
+        <h1>Nice ✨</h1>
+        <p>What time of day do you prefer?</p>
         <div class="options-grid">
-            <button class="opt-btn" onclick="saveChoice('Time', 'Morning ☀️', 'step4')">Morning ☀️</button>
-            <button class="opt-btn" onclick="saveChoice('Time', 'Afternoon 🌤️', 'step4')">Afternoon 🌤️</button>
-            <button class="opt-btn" onclick="saveChoice('Time', 'Evening 🌆', 'step4')">Evening 🌆</button>
-            <button class="opt-btn" onclick="saveChoice('Time', 'Night 🌙', 'step4')">Night 🌙</button>
-        </div>
+            <button class="opt-btn" onclick="showStep('step4')">Morning </button>
+            <button class="opt-btn" onclick="showStep('step4')">Afternoon </button>
+            <button class="opt-btn" onclick="showStep('step4')">Evening </button>
+            <button class="opt-btn" onclick="showStep('step4')">Night </button> 
+       </div>
     </div>
 
     <!-- STEP 4 -->
     <div class="container hidden" id="step4">
-        <h1>Where should we go? 🗺️</h1>
-        <p>Pick a setting:</p>
+        <h1>What are we eating? 😋</h1>
+        <p>Choose your vibe:</p>
         <div class="options-grid">
-            <button class="opt-btn" onclick="saveChoice('Place', 'Cozy Restaurant 🍽️', 'step5')">Cozy Restaurant 🍽️</button>
-            <button class="opt-btn" onclick="saveChoice('Place', 'Cute Cafe ☕', 'step5')">Cute Cafe ☕</button>
-            <button class="opt-btn" onclick="saveChoice('Place', 'Walk in the Park 🌳', 'step5')">Park Walk 🌳</button>
-            <button class="opt-btn" onclick="saveChoice('Place', 'Cinema / Theater 🎬', 'step5')">Cinema / Theater 🎬</button>
-            <button class="opt-btn" onclick="saveChoice('Place', 'Museum / Art Gallery 🎨', 'step5')">Museum / Gallery 🎨</button>
-            <button class="opt-btn" onclick="saveChoice('Place', 'Surprise Me 🪄', 'step5')">Surprise Me 🪄</button>
+            <button class="opt-btn" onclick="showStep('step5')">Uzbek cuisine </button>
+            <button class="opt-btn" onclick="showStep('step5')">Pan-Asian cuisine </button>
+            <button class="opt-btn" onclick="showStep('step5')">Korean cuisine </button>
+            <button class="opt-btn" onclick="showStep('step5')">Turkish cuisine </button>
+            <button class="opt-btn" onclick="showStep('step5')">Russian cuisine </button>
+            <button class="opt-btn" onclick="showStep('step5')">Italian cuisine </button>
+            <button class="opt-btn" onclick="showStep('step5')">Coffee shops & Bakeries </button>
         </div>
     </div>
 
     <!-- STEP 5 -->
     <div class="container hidden" id="step5">
-        <h1>What are we eating? 😋</h1>
-        <p>Choose your flavor vibe:</p>
-        <div class="options-grid">
-            <button class="opt-btn" onclick="saveChoice('Food', 'Sushi & Asian 🥢', 'step6')">Sushi & Asian 🥢</button>
-            <button class="opt-btn" onclick="saveChoice('Food', 'Italian Pasta & Pizza 🍝', 'step6')">Italian 🍝</button>
-            <button class="opt-btn" onclick="saveChoice('Food', 'Burgers & Steaks 🍔', 'step6')">Burgers 🍔</button>
-            <button class="opt-btn" onclick="saveChoice('Food', 'Sweet Desserts & Pastry 🥞', 'step6')">Desserts 🥞</button>
-            <button class="opt-btn" onclick="saveChoice('Food', 'Tacos & Mexican 🌮', 'step6')">Tacos 🌮</button>
-            <button class="opt-btn" onclick="saveChoice('Food', 'Healthy / Vegan 🥗', 'step6')">Healthy 🥗</button>
-        </div>
+        <h1>Almost done! 🌸</h1>
+        <p>What are your favorite flowers?</p>
+        <input type="text" id="flowersInput" placeholder="Roses, tulips, lilies, sunflowers, daisies, orchids, peonies, carnations">
+        <button class="submit-btn" onclick="showStep('step6')">Send details to her ✨</button>
     </div>
 
     <!-- STEP 6 -->
     <div class="container hidden" id="step6">
-        <h1>Almost done! 🌸</h1>
-        <p>What are your favorite flowers?</p>
-        <input type="text" id="flowersInput" placeholder="Roses, tulips, lilies, orchids, sunflowers, daisies...">
-        <button class="submit-btn" onclick="sendAllData()">Send details to her✨</button>
-    </div>
-
-    <!-- STEP 7 -->
-    <div class="container hidden" id="step7">
         <h1>It's a date! 📅❤️</h1>
         <p>Thanks for your time. Can't wait to see you!</p>
     </div>
 
     <script>
-        let scale = 1.0;
-        let celebrating = false;
-        const answers = {};
+        let noScale = 1.0;
+        let isCelebrating = false;
 
-        function moveNo() {
-            const btn = document.getElementById('noBtn');
+        function moveAndShrinkNoButton() {
+            const noBtn = document.getElementById('noBtn');
+            const area = document.getElementById('mainArea');
             
-            scale -= 0.12;
-            if (scale < 0.2) scale = 0.2;
+            noScale -= 0.12;
+            if (noScale < 0.15) noScale = 0.15;
             
-            // Переключаем кнопку в режим свободного полёта по всему экрану
-            btn.style.position = 'fixed';
+            const maxX = area.clientWidth - 80;
+            const maxY = 150;
             
-            // Выбираем случайное место на экране, отступая от краёв, чтобы кнопка не спряталась за границы
-            const randomX = Math.floor(Math.random() * 70) + 15; // от 15% до 85% ширины экрана
-            const randomY = Math.floor(Math.random() * 70) + 15; // от 15% до 85% высоты экрана
+            const randomX = Math.floor(Math.random() * maxX) - (maxX / 2);
+            const randomY = Math.floor(Math.random() * maxY) - 50;
             
-            btn.style.left = randomX + 'vw';
-            btn.style.top = randomY + 'vh';
-            btn.style.transform = `translate(-50%, -50%) scale(${scale})`;
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `calc(50% + ${randomX}px)`;
+            noBtn.style.top = `${randomY}px`;
+            noBtn.style.transform = `scale(${noScale})`;
         }
 
         function handleYesClick() {
-            celebrating = true;
-            startFlowers();
+            isCelebrating = true;
+            startFlowerRain();
             showStep('step2');
         }
 
-        function showStep(id) {
+        function showStep(stepId) {
             document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(stepId).classList.remove('hidden');
         }
 
-        function saveChoice(key, value, nextStep) {
-            answers[key] = value;
-            showStep(nextStep);
-        }
-
-        function sendAllData() {
-            answers['Flowers'] = document.getElementById('flowersInput').value || 'None';
-            showStep('step7');
-
-            if (FORMSPREE_LINK && FORMSPREE_LINK !== 'СЮДА_ВСТАВЬ_ССЫЛКУ') {
-                fetch(FORMSPREE_LINK, {
-                    method: 'POST',
-                    body: JSON.stringify(answers),
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
-                });
-            }
-        }
-
-        function startFlowers() {
-            const f = ['🌸', '🌹', '🌷', '🌺', '✨', '💕'];
+        function startFlowerRain() {
+            const flowers = ['🌸', '🌹', '🌷', '🌺', '✨', '💕'];
             setInterval(() => {
-                if (!celebrating) return;
-                const el = document.createElement('div');
-                el.classList.add('flower');
+                if (!isCelebrating) return;
+                const flower = document.createElement('div');
+                flower.classList.add('flower');
+                flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = Math.random() * 2 + 3 + 's';
+                flower.style.opacity = Math.random() * 0.7 + 0.3;
+                document.body.appendChild(flower);
+                setTimeout(() => flower.remove(), 5000);
+            }, 250);
+        }
+    </script>
+</body>
+</html>
